@@ -1,4 +1,4 @@
-package myself.library.model;
+package myself.library.model.entities;
 
 import java.io.Serializable;
 
@@ -10,9 +10,11 @@ import java.io.Serializable;
  **/
 public class Book implements Serializable {
     private int bookId;
+
     private String bookName;
     private String bookAuthor;
     private String bookPrice;
+    private int bookStatus;
 
     public Book(int bookId, String bookName, String bookAuthor, String bookPrice, Integer bookStatus) {
         this.bookId = bookId;
@@ -21,8 +23,6 @@ public class Book implements Serializable {
         this.bookPrice = bookPrice;
         this.bookStatus = bookStatus;
     }
-
-    private Integer bookStatus;
 
     public Book() {
     }
