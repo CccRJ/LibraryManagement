@@ -33,6 +33,6 @@ public interface BookDao {
 
     @Update("update book set bookStatus = #{bookStatus} " +
             "where bookId = #{bookId}")
-    int updateBookStatus(Integer bookId,int bookStatus);
+    int updateBookStatus(Integer bookId, int bookStatus);
 
 }

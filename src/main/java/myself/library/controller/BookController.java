@@ -4,6 +4,7 @@ import myself.library.model.entities.Book;
 import myself.library.model.entities.User;
 import myself.library.service.BookService;
 import myself.library.service.HostHolder;
+import myself.library.utils.ConcurrentUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -32,13 +33,14 @@ public class BookController {
     }
 
     /**
-     * 初始页面
+     * 登陆前 初始页面
      * @param model
-     * @return
+     * @return 初始页面
      */
     @RequestMapping(path = {"/index",""}, method = {RequestMethod.GET})
     public String bookList(Model model){
         //线程同步
+        //System.out.println("BookController-"+Thread.currentThread());
         User host = hostHolder.getUser();
         if (host != null){
             model.addAttribute("host",host);
@@ -50,7 +52,7 @@ public class BookController {
 
     /**
      * 跳转到addbook.html页面
-     * @return
+     * @return 加书页面
      */
     @RequestMapping(path = "/books/add",method = RequestMethod.GET)
     public String addBook(){
@@ -61,7 +63,7 @@ public class BookController {
     /**
      * 添加书籍，重定向返回初始页面
      * @param book
-     * @return
+     * @return 重定向初始页面
      */
     @RequestMapping(path = "/books/add/do",method = RequestMethod.POST)
     public String doAddBook(Book book){
@@ -72,8 +74,9 @@ public class BookController {
 
     /**
      * 借书，修改书的状态为删除状态
+     *
      * @param bookId
-     * @return
+     * @return 重定向初始页面
      */
     @RequestMapping(path = "/books/{bookId:[0-9]+}/delete",method = RequestMethod.GET)
     public String deleteBook(@PathVariable("bookId") int bookId){
@@ -84,7 +87,7 @@ public class BookController {
     /**
      * 还书，书修改为存在状态
      * @param bookId
-     * @return
+     * @return 重定向初始页面
      */
     @RequestMapping(path = "/books/{bookId:[0-9]+}/recover",method = RequestMethod.GET)
     public String recoverBook(@PathVariable("bookId") int bookId){
